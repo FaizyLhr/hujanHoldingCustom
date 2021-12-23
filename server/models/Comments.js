@@ -44,6 +44,4 @@ CommentsSchema.methods.toJSON = function () {
 	};
 };
 
-
-
 module.exports = mongoose.model("Comments", CommentsSchema);

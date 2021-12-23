@@ -3,32 +3,22 @@ const passport = require("passport"),
 
 const UserModel = require("../models/User");
 
-const localStrategy = new LocalStrategy({
-		usernameField: "userName",
-		passwordField: "password"
-	},
+const localStrategy = new LocalStrategy(
+	{ usernameField: "userName", passwordField: "password" },
 	(userName, password, done) => {
-		UserModel.findOne({
-			userName
-		}, (err, user) => {
+		UserModel.findOne({ userName }, (err, user) => {
 			if (err) {
 				return done(err);
 			}
 			if (!user) {
-				return done(null, false, {
-					message: "Incorrect UserName Address"
-				});
+				return done(null, false, { message: "Incorrect UserName Address" });
 			}
 			if (user.validPassword(password) != true) {
-				return done(null, false, {
-					message: "Incorrect Password"
-				});
+				return done(null, false, { message: "Incorrect Password" });
 			}
 			return done(null, user);
 		});
 	}
 );
 
-module.exports = {
-	localStrategy
-};
+module.exports = { localStrategy };

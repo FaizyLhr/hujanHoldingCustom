@@ -2,41 +2,28 @@ let mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate-v2");
 const slug = require("slug");
 
-let NewsSchema = new mongoose.Schema({
-	slug: {
-		type: String,
-		unique: true,
-		required: true,
-		trim: true
-	},
-	title: {
-		type: String,
-		required: true,
-		trim: true,
-		minlength: 1,
-	},
-	body: {
-		type: String,
-		required: true,
-		trim: true,
-		minlength: 1,
-	},
-	image: {
-		type: String,
-		default: null
-	},
-	comments: {
-		type: Array,
-		default: mongoose.Schema.Types.ObjectId
-	},
+let NewsSchema = new mongoose.Schema(
+	{
+		slug: { type: String, unique: true, required: true, trim: true },
+		title: {
+			type: String,
+			required: true,
+			trim: true,
+			minlength: 1,
+		},
+		body: {
+			type: String,
+			required: true,
+			trim: true,
+			minlength: 1,
+		},
+		image: { type: String, default: null },
+		comments: { type: Array, default: null },
 
-	postedBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: "User"
+		postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 	},
-}, {
-	timestamps: true
-});
+	{ timestamps: true }
+);
 
 NewsSchema.plugin(mongoosePaginate);
 
