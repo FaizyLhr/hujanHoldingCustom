@@ -6,8 +6,6 @@ let { OkResponse, BadRequestResponse, UnauthorizedResponse } = require("express-
 
 const User = require("../../models/User");
 
-const getToken = require("../../utilities/getToken");
-
 const { isAdmin, isToken, isUser } = require("../auth");
 
 // Acquiring Passport
@@ -62,9 +60,9 @@ router.post("/signUp", (req, res, next) => {
 });
 
 // Login
-router.post("/login", passport.authenticate("local", { session: false }), getToken, (req, res, next) => {
-	if (req.user.status === 0) return next(new OkResponse(req.user.toAuthJSON()));
-	return next(new BadRequestResponse("User is not active by the admin.", 423));
+router.post("/login", passport.authenticate("local", { session: false }), (req, res, next) => {
+	if (req.user.status !== 0) return next(new BadRequestResponse("User is not active by the admin.", 423));
+	return next(new OkResponse(req.user.toAuthJSON()));
 });
 
 // Change Status of user
@@ -77,7 +75,7 @@ router.put("/verify/:email/:changeStatus", isToken, isAdmin, async (req, res, ne
 	});
 });
 
-// View All users
+// View All Non Deleted users
 router.get("/all/:changeStatus", isToken, isAdmin, (req, res, next) => {
 	const options = { page: +req.query.page || 1, limit: +req.query.limit || 10 };
 
