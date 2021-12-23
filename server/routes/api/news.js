@@ -6,6 +6,18 @@ const News = require("../../models/News");
 
 const { isAdmin, isUser, isToken } = require("../auth");
 
+// get News for every time newsSlug given
+router.param("newsSlug", (req, res, next, slug) => {
+	News.findOne({ slug }, (err, news) => {
+		if (!err && news !== null) {
+			// console.log(news);
+			req.news = news;
+			return next();
+		}
+		return next(new BadRequestResponse("News not found!", 423));
+	});
+});
+
 // Add News
 router.post("/add", isToken, isAdmin, (req, res, next) => {
 	// console.log(req.body);
@@ -45,4 +57,10 @@ router.get("/get/all", isToken, (req, res, next) => {
 	});
 });
 
+router.delete("/del/:newsSlug", isToken, isAdmin, (req, res, next) => {
+	req.news.remove((err, result) => {
+		if (err) return next(new BadRequestResponse(err));
+		return next(new OkResponse(result));
+	});
+});
 module.exports = router;
