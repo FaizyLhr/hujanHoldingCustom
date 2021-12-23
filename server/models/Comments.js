@@ -8,8 +8,8 @@ let CommentsSchema = new mongoose.Schema(
 		text: { type: String, trim: true, minlength: 1 },
 		likes: { type: Array, default: null },
 		isDeleted: { type: Boolean, default: false },
-		commentedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: mongoose.Schema.Types.ObjectId },
-		commentedOn: { type: mongoose.Schema.Types.ObjectId, ref: "News", default: mongoose.Schema.Types.ObjectId },
+		commentedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: mongoose.Types.ObjectId },
+		commentedOn: { type: mongoose.Schema.Types.ObjectId, ref: "News", default: mongoose.Types.ObjectId },
 	},
 	{ timestamps: true }
 );

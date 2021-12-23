@@ -9,7 +9,7 @@ let NewsSchema = new mongoose.Schema(
 		body: { type: String, required: true, trim: true, minlength: 1 },
 		image: { type: String, default: null },
 		comments: { type: Array, default: null },
-		postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: mongoose.Schema.Types.ObjectId },
+		postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: mongoose.Types.ObjectId },
 	},
 	{ timestamps: true }
 );
