@@ -14,9 +14,7 @@ mongoose
 		process.exit(1);
 	})
 	.then(() => {
-		console.log(
-			`connected to db in ${isProduction ? "Prod" : "Dev"} environment`
-		);
+		console.log(`connected to db in ${isProduction ? "Prod" : "Dev"} environment`);
 		init();
 	});
 

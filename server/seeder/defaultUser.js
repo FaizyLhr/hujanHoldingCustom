@@ -4,17 +4,15 @@ async function seedUser() {
 	// Seed Admin
 	{
 		let newUser = new User();
-		newUser.role = 1;
 
+		newUser.role = 1;
 		newUser.email = "admin@gmail.com";
 		newUser.userName = "admin";
 		newUser.firstName = "admin";
 		newUser.lastName = "admin";
 		newUser.img = "../public/uploads/Faizy.png";
-
-		newUser.setPassword("1234");
-		newUser.isEmailVerified = true;
 		newUser.status = 0;
+		newUser.setPassword("1234");
 
 		await newUser.save();
 	}
@@ -27,9 +25,7 @@ async function seedUser() {
 		newUser.firstName = "firstName";
 		newUser.lastName = "lastName";
 		newUser.img = "../public/uploads/Faizy.png";
-
-		newUser.setPassword("faizy");
-		newUser.isEmailVerified = true;
+		newUser.setPassword("1234");
 
 		await newUser.save();
 	}
