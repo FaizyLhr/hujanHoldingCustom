@@ -25,6 +25,7 @@ async function seedUser() {
 		newUser.firstName = "firstName";
 		newUser.lastName = "lastName";
 		newUser.img = "../public/uploads/Faizy.png";
+		newUser.status = 0;
 		newUser.setPassword("1234");
 
 		await newUser.save();
