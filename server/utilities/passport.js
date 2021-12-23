@@ -1,6 +1,8 @@
 const passport = require("passport"),
 	LocalStrategy = require("passport-local").Strategy;
 
+let { BadRequestResponse, UnauthorizedResponse, ForbiddenResponse } = require("express-http-response");
+
 const User = require("../models/User");
 
 const localStrategy = new LocalStrategy({ usernameField: "userName", passwordField: "password" }, (userName, password, done) => {
