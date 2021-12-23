@@ -12,12 +12,7 @@ let http = require("http"),
 	httpResponse = require("express-http-response");
 let isProduction = process.env.NODE_ENV === "production";
 module.exports = (app) => {
-	var allowedOrigins = [
-		"http://localhost:4200",
-		"http://localhost:4300",
-		"http://localhost:3000",
-		"http://134.122.23.88",
-	];
+	var allowedOrigins = ["http://localhost:4200", "http://localhost:4300", "http://localhost:3000", "http://134.122.23.88"];
 	app.use(
 		cors({
 			credentials: true,
@@ -26,9 +21,7 @@ module.exports = (app) => {
 				// (like mobile apps or curl requests)
 				if (!origin) return callback(null, true);
 				if (allowedOrigins.indexOf(origin) === -1) {
-					var msg =
-						"The CORS policy for this site does not " +
-						"allow access from the specified Origin.";
+					var msg = "The CORS policy for this site does not " + "allow access from the specified Origin.";
 					return callback(new Error(msg), false);
 				}
 				return callback(null, true);
@@ -72,7 +65,7 @@ module.exports = (app) => {
 			useCreateIndex: true,
 		});
 	} else {
-		mongoose.connect("mongodb://localhost/hujanholding?retryWrites=false", {
+		mongoose.connect("mongodb://localhost/hujanholdingCustom?retryWrites=false", {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
 			useFindAndModify: false,

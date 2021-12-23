@@ -31,8 +31,8 @@ router.get("/", function (req, res, next) {
 });
 
 // Signup
-router.post("/signUp", (req, res, next) => {
-	if (!req.body.user.email || !req.body.user.userName || !req.body.user.password || !req.body.user.firstName || !req.body.user.lastName) {
+router.post("/signup", (req, res, next) => {
+	if (!req.body.user || !req.body.user.email || !req.body.user.userName || !req.body.user.password || !req.body.user.firstName || !req.body.user.lastName) {
 		return next(new BadRequestResponse("Missing required parameter", 422));
 	} else if (
 		req.body.user.email.length === 0 ||
