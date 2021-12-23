@@ -5,14 +5,12 @@ let secret = require("../config").secret;
 let { BadRequestResponse, UnauthorizedResponse, ForbiddenResponse } = require("express-http-response");
 
 function isAdmin(req, res, next) {
-	isToken();
 	if (!req.user) return next(new BadRequestResponse("No User Found"));
 	if (!(req.user.role === 1)) return next(new UnauthorizedResponse("Access Denied"));
 	next();
 }
 
 function isUser(req, res, next) {
-	isToken();
 	if (!req.user) return next(new BadRequestResponse("No User Found"));
 	if (!(req.user.role === 2)) return next(new UnauthorizedResponse("Access Denied"));
 	next();

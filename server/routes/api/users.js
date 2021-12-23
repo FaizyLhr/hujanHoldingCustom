@@ -66,9 +66,9 @@ router.post("/login", passport.authenticate("local", { session: false }), (req, 
 });
 
 // Change Status of user
-router.put("/verify/:email/:changeStatus", isToken, isAdmin, async (req, res, next) => {
-	if (req.emailUser.status == req.params.changeStatus) return next(new BadRequestResponse("Status Already Changed"));
-	req.emailUser.status = req.params.changeStatus;
+router.put("/verify/:email/:status", isToken, isAdmin, async (req, res, next) => {
+	if (req.emailUser.status == req.params.status) return next(new BadRequestResponse("Status Already Changed"));
+	req.emailUser.status = req.params.status;
 	req.emailUser.save((err, result) => {
 		if (err) return next(new BadRequestResponse(err));
 		return next(new OkResponse(req.emailUser.toJSON()));
@@ -76,16 +76,15 @@ router.put("/verify/:email/:changeStatus", isToken, isAdmin, async (req, res, ne
 });
 
 // View All Non Deleted users
-router.get("/all/:changeStatus", isToken, isAdmin, (req, res, next) => {
+router.get("/get/all/:status", isToken, isAdmin, (req, res, next) => {
 	const options = { page: +req.query.page || 1, limit: +req.query.limit || 10 };
 
 	let query = {};
 	query.role = 2;
-
-	if (req.params.changeStatus === 0) {
+	if (+req.params.status === 0) {
 		query.status = { $ne: 2 };
-	} else if (req.params.changeStatus === 1) {
-		query.status = req.params.changeStatus;
+	} else if (+req.params.status === 1) {
+		query.status = req.params.status;
 	} else {
 		return next(new UnauthorizedResponse("Param is not a Valid"));
 	}
