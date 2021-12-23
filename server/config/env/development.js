@@ -2,7 +2,7 @@
 const nodemailer = require("nodemailer");
 module.exports = {
 	PORT: 3000,
-	MONGODB_URI: "mongodb://localhost:27017/hujanholding",
+	MONGODB_URI: "mongodb://localhost:27017/hujanholdingCustom",
 	secret: "secret",
 	host: "localhost:3000",
 	// link: 'localhost:4200',
