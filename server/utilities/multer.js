@@ -2,28 +2,28 @@ const multer = require("multer");
 const path = require("path");
 
 const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, path.join(process.cwd(), "server/public", "uploads"));
-  },
-  filename: function(req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname);
-  }
+	destination: function (req, file, cb) {
+		cb(null, path.join(process.cwd(), "server/public", "uploads"));
+	},
+	filename: function (req, file, cb) {
+		cb(null, Date.now() + "-" + file.originalname);
+	},
 });
 
 function fileFilter(req, file, cb) {
-  // The function should call `cb` with a boolean
-  // to indicate if the file should be accepted
+	// The function should call `cb` with a boolean
+	// to indicate if the file should be accepted
 
-  // To reject this file pass `false`, like so:
-  //   cb(null, false);
+	// To reject this file pass `false`, like so:
+	//   cb(null, false);
 
-  // To accept the file pass `true`, like so:
-  cb(null, true);
+	// To accept the file pass `true`, like so:
+	cb(null, true);
 
-  console.log(file);
+	console.log(file);
 
-  // You can always pass an error if something goes wrong:
-  //   cb(new Error("I don't have a clue!"));
+	// You can always pass an error if something goes wrong:
+	//   cb(new Error("I don't have a clue!"));
 }
 
 module.exports = multer({ storage: storage });
