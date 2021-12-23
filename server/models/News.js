@@ -5,27 +5,25 @@ const slug = require("slug");
 let NewsSchema = new mongoose.Schema(
 	{
 		slug: { type: String, unique: true, required: true, trim: true },
-		title: {
-			type: String,
-			required: true,
-			trim: true,
-			minlength: 1,
-		},
-		body: {
-			type: String,
-			required: true,
-			trim: true,
-			minlength: 1,
-		},
+		title: { type: String, required: true, trim: true, minlength: 1 },
+		body: { type: String, required: true, trim: true, minlength: 1 },
 		image: { type: String, default: null },
 		comments: { type: Array, default: null },
-
-		postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+		postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: mongoose.Schema.Types.ObjectId },
 	},
 	{ timestamps: true }
 );
 
 NewsSchema.plugin(mongoosePaginate);
+
+function prePopulate(next) {
+	this.populate("postedBy");
+	next();
+}
+
+NewsSchema.pre("find", prePopulate);
+NewsSchema.pre("findOne", prePopulate);
+NewsSchema.pre("findById", prePopulate);
 
 NewsSchema.pre("validate", function (next) {
 	if (!this.slug) {

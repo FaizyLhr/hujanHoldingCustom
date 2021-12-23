@@ -5,23 +5,26 @@ const slug = require("slug");
 let CommentsSchema = new mongoose.Schema(
 	{
 		slug: { type: String, unique: true, required: true, trim: true },
-		text: {
-			type: String,
-			trim: true,
-			minlength: 1,
-		},
-		likes: {
-			type: Array,
-			default: null,
-		},
+		text: { type: String, trim: true, minlength: 1 },
+		likes: { type: Array, default: null },
 		isDeleted: { type: Boolean, default: false },
-		commentedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-		commentedOn: { type: mongoose.Schema.Types.ObjectId, ref: "News" },
+		commentedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: mongoose.Schema.Types.ObjectId },
+		commentedOn: { type: mongoose.Schema.Types.ObjectId, ref: "News", default: mongoose.Schema.Types.ObjectId },
 	},
 	{ timestamps: true }
 );
 
 CommentsSchema.plugin(mongoosePaginate);
+
+function prePopulate(next) {
+	this.populate("commentedBy");
+	this.populate("commentedOn");
+	next();
+}
+
+CommentsSchema.pre("find", prePopulate);
+CommentsSchema.pre("findOne", prePopulate);
+CommentsSchema.pre("findById", prePopulate);
 
 CommentsSchema.pre("validate", function (next) {
 	if (!this.slug) {
@@ -36,12 +39,10 @@ CommentsSchema.methods.slugify = function () {
 
 CommentsSchema.methods.toJSON = function () {
 	return {
-		Comment: {
-			text: this.text,
-			likes: this.likes,
-			commentedBy: this.commentedBy,
-		},
+		text: this.text,
+		likes: this.likes,
+		commentedBy: this.commentedBy,
 	};
 };
 
-module.exports = mongoose.model("Comments", CommentsSchema);
+module.exports = mongoose.model("Comment", CommentsSchema);
