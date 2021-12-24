@@ -9,6 +9,7 @@ let NewsSchema = new mongoose.Schema(
 		body: { type: String, required: true, trim: true, minlength: 1 },
 		image: { type: String, default: null },
 		comments: { type: Array, default: null },
+		isSocial: { type: Boolean, default: true },
 		postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: mongoose.Types.ObjectId },
 	},
 	{ timestamps: true }
@@ -42,6 +43,7 @@ NewsSchema.methods.toJSON = function () {
 		title: this.title,
 		body: this.body,
 		image: this.image,
+		isSocial: this.isSocial,
 		postedBy: this.postedBy,
 	};
 };

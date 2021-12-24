@@ -19,9 +19,7 @@ router.param("newsSlug", (req, res, next, slug) => {
 });
 
 // Add News
-router.post("/add", isToken, isAdmin, (req, res, next) => {
-	// console.log(req.body);
-
+router.post("/add", isToken, (req, res, next) => {
 	// Validate User input
 	if (!req.body.news || !req.body.news.title || !req.body.news.body) {
 		return next(new BadRequestResponse("Missing required parameter", 422));
@@ -37,10 +35,33 @@ router.post("/add", isToken, isAdmin, (req, res, next) => {
 		newNews.body = req.body.news.body;
 	}
 	newNews.postedBy = req.user._id;
-
+	if (req.user.role === 1) {
+		newNews.isSocial = false;
+	}
 	newNews.save((err, result) => {
 		if (err) return next(new BadRequestResponse(err));
 		return next(new OkResponse(result));
+	});
+});
+
+// View All Admin or Social News
+router.get("/get/all/:role", isToken, (req, res, next) => {
+	const options = {
+		page: +req.query.page || 1,
+		limit: +req.query.limit || 10,
+	};
+	let query = {};
+	if (+req.params.role === 1) {
+		query.isSocial = true;
+	} else if (+req.params.role === 2) {
+		query.isSocial = false;
+	} else {
+		return next(new BadRequestResponse("Params not Valid"));
+	}
+
+	News.paginate(query, options, function (err, result) {
+		if (err) return next(new BadRequestResponse("Server Error"), 500);
+		return next(new OkResponse({ result: result.docs }));
 	});
 });
 
@@ -57,6 +78,7 @@ router.get("/get/all", isToken, (req, res, next) => {
 	});
 });
 
+// delete a news by admin
 router.delete("/del/:newsSlug", isToken, isAdmin, (req, res, next) => {
 	req.news.remove((err, result) => {
 		if (err) return next(new BadRequestResponse(err));
