@@ -65,6 +65,34 @@ router.post("/login", passport.authenticate("local", { session: false }), (req, 
 	return next(new OkResponse(req.user.toAuthJSON()));
 });
 
+// Update Profile of User
+router.put("/edit/:email", isToken, (req, res, next) => {
+	console.log(req.body);
+	console.log(req.emailUser.email);
+	UserModel.findOne({ email: req.emailUser.email }) 
+		.then((updateUser) => {
+			console.log(req.body);
+
+			if (req.body.firstName) {
+				updateUser.firstName = req.body.firstName;
+			}
+			if (req.body.lastName) {
+				updateUser.lastName = req.body.lastName;
+			}
+			if (req.body.userName) {
+				updateUser.userName = req.body.userName;
+			}
+			if (req.body.img) {
+				updateUser.img = req.body.img;
+			}
+			updateUser
+				.save()
+				.then((user) => next(new OkResponse(user)))
+				.catch((err) => next(new BadRequestResponse(err)));
+		})
+		.catch((err) => next(new BadRequestResponse(err)));
+});
+
 // Change Status of user
 router.put("/verify/:email/:status", isToken, isAdmin, async (req, res, next) => {
 	if (req.emailUser.status == req.params.status) return next(new BadRequestResponse("Status Already Changed"));
