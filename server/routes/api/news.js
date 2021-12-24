@@ -65,6 +65,12 @@ router.get("/get/all/:role", isToken, (req, res, next) => {
 	});
 });
 
+// View Specific News
+router.get("/get/:newsSlug", isToken, (req, res, next) => {
+	if (!req.news) return next(new BadRequestResponse("No News Found"));
+	return next(new OkResponse(req.news));
+});
+
 // View All News
 router.get("/get/all", isToken, (req, res, next) => {
 	const options = {
