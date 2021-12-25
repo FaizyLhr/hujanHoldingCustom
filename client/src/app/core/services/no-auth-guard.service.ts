@@ -17,7 +17,6 @@ export class NoAuthGuard implements CanActivate {
   ): boolean {
     if (this.userService.authenticated) {
       this.router.navigate(['/']);
-
       return false;
     }
     return true;
