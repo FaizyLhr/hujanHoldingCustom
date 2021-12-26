@@ -1,0 +1,26 @@
+<p>detail works!</p>
+<div class="container p-4">
+  <a routerLink="/home/sponsor" class="btn btn-info">Back</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Body</th>
+        <th scope="col">Image</th>
+        <th scope="col">Posted By</th>
+        <th scope="col">Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- <tr *ngFor="let user of allUsers; let i = index"> -->
+      <tr>
+        <td>{{ news?.title }}</td>
+        <td>{{ news?.body }}</td>
+        <td>{{ news?.image }}</td>
+        <td>{{ news?.postedBy?.email }}</td>
+        <td>Comments</td>
+        <!-- <td>Comments{{ news?.comments }}</td> -->
+      </tr>
+    </tbody>
+  </table>
+</div>

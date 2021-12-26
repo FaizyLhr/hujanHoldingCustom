@@ -45,6 +45,7 @@ NewsSchema.methods.toJSON = function () {
 		image: this.image,
 		isSocial: this.isSocial,
 		postedBy: this.postedBy,
+		comments: this.comments,
 	};
 };
 

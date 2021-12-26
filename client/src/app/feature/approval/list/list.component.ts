@@ -11,8 +11,6 @@ import Swal from 'sweetalert2';
 })
 export class ListComponent implements OnInit {
   approvalUsers: any;
-  role: number = 1;
-  status: number = 1;
   user: any;
 
   constructor(private userService: UserService, private router: Router) {}
@@ -22,7 +20,7 @@ export class ListComponent implements OnInit {
   }
 
   getApprovals() {
-    this.userService.getApprovals(this.role).subscribe(
+    this.userService.getApprovals(1).subscribe(
       (data) => {
         console.log(data);
         this.approvalUsers = data.data.result;

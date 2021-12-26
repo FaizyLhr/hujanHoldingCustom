@@ -1,0 +1,48 @@
+<p>list works!</p>
+<div class="container p-4">
+  <a routerLink="add" class="btn btn-outline-primary">Add Post</a>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Title</th>
+        <th scope="col">Body</th>
+        <th scope="col">Sender</th>
+        <th scope="col">Image</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let news of allNews; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ news?.title }}</td>
+        <td>{{ news?.body }}</td>
+        <td>{{ news?.postedBy?.email }}</td>
+        <td>{{ news?.image }}</td>
+        <td>
+          <a
+            class="btn btn-outline-dark m-1"
+            [routerLink]="['detail/', news?.slug]"
+            >View</a
+          >
+          <a
+            class="btn btn-outline-success m-1"
+            (click)="approveUser(news?.email)"
+            >Approve</a
+          >
+          <a
+            class="btn btn-outline-danger m-1"
+            (click)="rejectUser(news?.email)"
+            >Reject</a
+          >
+
+          <!-- <a class="btn btn-outline-danger m-1" (click)="delUser(user)"
+            >Delete</a
+          > -->
+          <!-- <a (click)="changeStatus(i)"><i class="fas fa-lock"></i></a> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
