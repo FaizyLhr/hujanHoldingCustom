@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of customerUsers; let i = index">
+      <tr *ngFor="let user of approvalUsers; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ user?.firstName }}</td>
         <td>{{ user?.lastName }}</td>
@@ -24,13 +24,12 @@
           >
           <a
             class="btn btn-outline-success m-1"
-            [routerLink]="['/home/addServices', user?.email]"
-            (click)="changeStatus()"
+            (click)="approveUser(user?.email)"
             >Approve</a
           >
           <a
             class="btn btn-outline-danger m-1"
-            [routerLink]="['/home/edit/', user?.email]"
+            (click)="rejectUser(user?.email)"
             >Reject</a
           >
 

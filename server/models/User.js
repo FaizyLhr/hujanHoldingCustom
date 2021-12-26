@@ -30,6 +30,7 @@ let UserSchema = new mongoose.Schema(
 				0, //Active
 				1, //Blocked
 				2, //Delete
+				3, //Rejected
 			],
 		},
 

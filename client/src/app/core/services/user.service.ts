@@ -100,7 +100,7 @@ export class UserService {
     return this.apiService.get(`/users/get/all/${status}`);
   }
 
-  changeStatus(email: string): Observable<any> {
-    return this.apiService.put('/users/verify/' + email);
+  changeStatus(email: string, status: number): Observable<any> {
+    return this.apiService.put(`/users/verify/${email}/${status}`);
   }
 }

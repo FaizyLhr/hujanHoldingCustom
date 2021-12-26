@@ -61,7 +61,7 @@ router.post("/signup", (req, res, next) => {
 
 // Login
 router.post("/login", passport.authenticate("local", { session: false }), (req, res, next) => {
-	console.log("USeerrr", req.user);
+	// console.log("USeerrr", req.user);
 	// if (req.user.status !== 0) return next(new BadRequestResponse("User is not active by the admin."));
 	return next(new OkResponse(req.user.toAuthJSON()));
 });
