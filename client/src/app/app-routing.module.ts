@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './core/layout/layout.component';
 import { NoAuthGuard } from './core/services/no-auth-guard.service';
+import { HomeComponent } from './feature/home/home.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/auth', pathMatch: 'full' },
@@ -17,8 +18,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () =>
-          import('./feature/home/home.module').then((m) => m.HomeModule),
+        component: HomeComponent,
       },
       {
         path: 'sponsor',
