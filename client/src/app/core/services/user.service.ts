@@ -30,7 +30,7 @@ export class UserService {
     // If JWT detected, attempt to get & store user's info
     if (this.jwtService.get()) {
       this.apiService.get('/users/context').subscribe(
-        (data) => this.setAuth(data.data.user),
+        (data) => this.setAuth(data.data),
         (err) => {
           this.purgeAuth();
           console.error('Error populating user', err);
@@ -77,6 +77,10 @@ export class UserService {
     return this.currentUserSubject.value;
   }
 
+  getUser(email: string): Observable<any> {
+    return this.apiService.get('/users/get/' + email);
+  }
+
   // Update the user on the server (email, pass, etc)
   update(user: any): Observable<any> {
     return this.apiService.put('/user', { user }).pipe(
@@ -90,6 +94,10 @@ export class UserService {
 
   getAllUsers(): Observable<any> {
     return this.apiService.get('/users/all');
+  }
+
+  getApprovals(status: number): Observable<any> {
+    return this.apiService.get(`/users/get/all/${status}`);
   }
 
   changeStatus(email: string): Observable<any> {
