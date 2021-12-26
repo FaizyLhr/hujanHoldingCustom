@@ -69,7 +69,7 @@ router.post("/login", passport.authenticate("local", { session: false }), (req, 
 router.put("/edit/:email", isToken, (req, res, next) => {
 	console.log(req.body);
 	console.log(req.emailUser.email);
-	UserModel.findOne({ email: req.emailUser.email }) 
+	UserModel.findOne({ email: req.emailUser.email })
 		.then((updateUser) => {
 			console.log(req.body);
 
