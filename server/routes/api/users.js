@@ -61,7 +61,8 @@ router.post("/signup", (req, res, next) => {
 
 // Login
 router.post("/login", passport.authenticate("local", { session: false }), (req, res, next) => {
-	if (req.user.status !== 0) return next(new BadRequestResponse("User is not active by the admin.", 423));
+	console.log("USeerrr", req.user);
+	// if (req.user.status !== 0) return next(new BadRequestResponse("User is not active by the admin."));
 	return next(new OkResponse(req.user.toAuthJSON()));
 });
 
@@ -103,7 +104,7 @@ router.put("/verify/:email/:status", isToken, isAdmin, async (req, res, next) =>
 	});
 });
 
-// View All Non Deleted users
+// View All status given users
 router.get("/get/all/:status", isToken, isAdmin, (req, res, next) => {
 	const options = { page: +req.query.page || 1, limit: +req.query.limit || 10 };
 
@@ -123,6 +124,12 @@ router.get("/get/all/:status", isToken, isAdmin, (req, res, next) => {
 	}).catch((e) => {
 		return next(new BadRequestResponse(e.error));
 	});
+});
+
+// View Specific users
+router.get("/get/:email", isToken, isAdmin, (req, res, next) => {
+	if (!req.emailUser) return next(new BadRequestResponse(e));
+	return next(new OkResponse(req.emailUser));
 });
 
 // User context Api
