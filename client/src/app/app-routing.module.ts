@@ -16,10 +16,7 @@ const routes: Routes = [
     path: 'home',
     component: LayoutComponent,
     children: [
-      {
-        path: '',
-        component: HomeComponent,
-      },
+      { path: '', component: HomeComponent },
       {
         path: 'sponsor',
         loadChildren: () =>
@@ -32,6 +29,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./feature/community/community.module').then(
             (m) => m.CommunityModule
+          ),
+      },
+      {
+        path: 'approvals',
+        loadChildren: () =>
+          import('./feature/approval/approval.module').then(
+            (m) => m.ApprovalModule
           ),
       },
     ],

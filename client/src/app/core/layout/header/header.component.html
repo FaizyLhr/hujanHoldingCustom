@@ -26,7 +26,42 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="community">Community</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="approvals">Approvals</a>
+        </li>
       </ul>
+    </div>
+    <div class="dropdown pull-right d-lg-block d-none">
+      <button
+        class="profile-dropdown-toggle"
+        type="button"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+        aria-label="profile dropdown"
+      >
+        <span class="thumbnail-wrapper d32 circular inline">
+          <img
+            src="assets/img/profiles/avatar.jpg"
+            alt=""
+            data-src="assets/img/profiles/avatar.jpg"
+            data-src-retina="assets/img/profiles/avatar_small2x.jpg"
+            width="32"
+            height="32"
+          />
+        </span>
+      </button>
+      <div
+        class="dropdown-menu dropdown-menu-right profile-dropdown"
+        role="menu"
+      >
+        <a href="#" class="dropdown-item"
+          ><span>Signed in as <br /><b>David Aunsberg</b></span></a
+        >
+        <div class="dropdown-divider"></div>
+        <a href="#" class="dropdown-item">Logout</a>
+        <div class="dropdown-divider"></div>
+      </div>
     </div>
   </div>
 </nav>
