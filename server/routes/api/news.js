@@ -91,4 +91,5 @@ router.delete("/del/:newsSlug", isToken, isAdmin, (req, res, next) => {
 		return next(new OkResponse(result));
 	});
 });
+
 module.exports = router;

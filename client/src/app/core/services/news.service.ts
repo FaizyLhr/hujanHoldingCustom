@@ -16,7 +16,15 @@ export class NewsService {
     return this.apiService.post('/news/add', { news: data });
   }
 
+  update(post: any, slug: string): Observable<any> {
+    return this.apiService.put(`/user/${slug}`, post);
+  }
+
   getNewsDetail(slug: string): Observable<any> {
     return this.apiService.get('/news/get/' + slug);
+  }
+
+  delPost(slug: string): Observable<any> {
+    return this.apiService.delete(`/news/del/${slug}`);
   }
 }

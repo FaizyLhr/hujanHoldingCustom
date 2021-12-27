@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NewsService, UserService } from 'src/app/core/services';
+import { NewsService } from 'src/app/core/services';
 
 import Swal from 'sweetalert2';
 
@@ -15,18 +15,14 @@ export class ListComponent implements OnInit {
   status: number = 1;
   user: any;
 
-  constructor(
-    private userService: UserService,
-    private router: Router,
-    private newsService: NewsService
-  ) {}
+  constructor(private router: Router, private newsService: NewsService) {}
 
   ngOnInit(): void {
     this.getNews();
   }
 
   getNews() {
-    this.newsService.getNews(2).subscribe(
+    this.newsService.getNews(1).subscribe(
       (data) => {
         console.log(data);
         this.allNews = data.data.result;

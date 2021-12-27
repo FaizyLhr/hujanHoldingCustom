@@ -32,6 +32,7 @@ router.get("/", function (req, res, next) {
 
 // Signup
 router.post("/signup", (req, res, next) => {
+	console.log("Sign");
 	if (!req.body.user || !req.body.user.email || !req.body.user.userName || !req.body.user.password || !req.body.user.firstName || !req.body.user.lastName) {
 		return next(new BadRequestResponse("Missing required parameter", 422));
 	} else if (
@@ -62,7 +63,7 @@ router.post("/signup", (req, res, next) => {
 // Login
 router.post("/login", passport.authenticate("local", { session: false }), (req, res, next) => {
 	// console.log("USeerrr", req.user);
-	// if (req.user.status !== 0) return next(new BadRequestResponse("User is not active by the admin."));
+	if (req.user.status !== 0) return next(new BadRequestResponse("User is not active by the admin."));
 	return next(new OkResponse(req.user.toAuthJSON()));
 });
 

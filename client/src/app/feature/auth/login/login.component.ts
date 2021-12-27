@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services';
 
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -30,13 +32,18 @@ export class LoginComponent implements OnInit {
     this.userService.attemptAuth('login', this.loginForm.value).subscribe(
       (data) => {
         // console.log(data);
-        if (data.data.role == 1 || data.data.role == 2)
-          // if (data.data.role == 1 )
+        if (data.data.role == 1 || data.data.role == 2) {
           this.router.navigate(['/home']);
-        else this.router.navigate(['/auth']);
+        } else this.router.navigate(['/auth']);
       },
       (err) => {
         this.hasErrors = true;
+        Swal.fire({
+          title: 'Error!',
+          text: err.message,
+          icon: 'error',
+          confirmButtonText: 'Go Back',
+        });
         if (err.code === 400) this.errorMessage = 'User is not active by admin';
         else this.errorMessage = 'Invalid credentials';
       }
