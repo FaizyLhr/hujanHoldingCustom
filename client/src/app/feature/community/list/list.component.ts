@@ -57,7 +57,7 @@ export class ListComponent implements OnInit {
       (err) => {
         Swal.fire({
           title: 'Error!',
-          text: err,
+          text: err.message,
           icon: 'error',
           confirmButtonText: 'Go Back',
         });

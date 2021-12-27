@@ -57,7 +57,7 @@ export class EditComponent implements OnInit {
           timer: 1500,
         });
         this.editPostForm.reset();
-        this.router.navigate(['/home/sponsor']);
+        this.router.navigate(['/home/community']);
       },
       (err) => {
         console.log(err);

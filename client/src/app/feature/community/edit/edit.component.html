@@ -1,8 +1,8 @@
-<p>add-post works!</p>
+<p>edit works!</p>
 <div class="container">
-  <form role="form" [formGroup]="addPostForm">
+  <form id="form-addCustomer" role="form" [formGroup]="editPostForm">
     <!-- START Form Control-->
-    <h1 class="text-center">Add Post Form</h1>
+    <h1 class="text-center">Edit Post Form</h1>
 
     <div class="form-group form-group-default">
       <div class="controls">
@@ -32,8 +32,6 @@
       </div>
     </div>
 
-    <!-- <h1>{{ num }}</h1> -->
-
     <!-- START Form Control-->
     <div class="row">
       <div class="col-md-6 d-flex align-items-center justify-content-end">
@@ -41,10 +39,10 @@
           aria-label=""
           class="btn btn-primary btn-lg"
           type="submit"
-          [disabled]="addPostForm.invalid"
+          [disabled]="editPostForm.invalid"
           (click)="onSubmit()"
         >
-          Add
+          Save
         </button>
       </div>
     </div>

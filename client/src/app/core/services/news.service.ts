@@ -17,7 +17,7 @@ export class NewsService {
   }
 
   update(post: any, slug: string): Observable<any> {
-    return this.apiService.put(`/user/${slug}`, post);
+    return this.apiService.put(`/news/edit/${slug}`, post);
   }
 
   getNewsDetail(slug: string): Observable<any> {

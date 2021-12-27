@@ -84,6 +84,24 @@ router.get("/get/all", isToken, (req, res, next) => {
 	});
 });
 
+// Update Profile of User
+router.put("/edit/:newsSlug", isToken, (req, res, next) => {
+	if (req.body.title) {
+		req.news.title = req.body.title;
+	}
+	if (req.body.body) {
+		req.news.body = req.body.body;
+	}
+	if (req.body.image) {
+		req.news.image = req.body.image;
+	}
+
+	req.news
+		.save()
+		.then((user) => next(new OkResponse(req.news)))
+		.catch((err) => next(new BadRequestResponse(err)));
+});
+
 // delete a news by admin
 router.delete("/del/:newsSlug", isToken, isAdmin, (req, res, next) => {
 	req.news.remove((err, result) => {

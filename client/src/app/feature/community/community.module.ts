@@ -3,21 +3,18 @@ import { CommonModule } from '@angular/common';
 
 import { CommunityRoutingModule } from './community-routing.module';
 import { CommunityComponent } from './community.component';
-import { DetailComponent } from './detail/detail.component';
 import { ListComponent } from './list/list.component';
 import { AddPostComponent } from './add-post/add-post.component';
-
+import { SharedModule } from 'src/app/shared/shared.module';
+import { EditComponent } from './edit/edit.component';
 
 @NgModule({
   declarations: [
     CommunityComponent,
-    DetailComponent,
     ListComponent,
-    AddPostComponent
+    AddPostComponent,
+    EditComponent,
   ],
-  imports: [
-    CommonModule,
-    CommunityRoutingModule
-  ]
+  imports: [CommonModule, CommunityRoutingModule, SharedModule],
 })
-export class CommunityModule { }
+export class CommunityModule {}
