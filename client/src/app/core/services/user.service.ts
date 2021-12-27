@@ -93,7 +93,11 @@ export class UserService {
   }
 
   getAllUsers(): Observable<any> {
-    return this.apiService.get('/users/all');
+    return this.apiService.get('/users/get/all');
+  }
+
+  delUser(email: string): Observable<any> {
+    return this.apiService.delete(`/users/del/${email}`);
   }
 
   getApprovals(status: number): Observable<any> {

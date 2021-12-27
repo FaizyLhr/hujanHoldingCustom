@@ -38,6 +38,11 @@ const routes: Routes = [
             (m) => m.ApprovalModule
           ),
       },
+      {
+        path: 'users',
+        loadChildren: () =>
+          import('./feature/users/users.module').then((m) => m.UsersModule),
+      },
     ],
   },
 ];

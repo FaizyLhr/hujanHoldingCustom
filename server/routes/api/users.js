@@ -105,6 +105,18 @@ router.put("/verify/:email/:status", isToken, isAdmin, async (req, res, next) =>
 	});
 });
 
+// View All users
+router.get("/get/all", isToken, isAdmin, (req, res, next) => {
+	const options = { page: +req.query.page || 1, limit: +req.query.limit || 10 };
+
+	let query = {};
+
+	User.paginate(query, options, function (err, result) {
+		if (err) return next(new BadRequestResponse("Server Error"), 500);
+		return next(new OkResponse({ result: result.docs }));
+	}).catch((e) => next(new BadRequestResponse(e.error)));
+});
+
 // View All status given users
 router.get("/get/all/:status", isToken, isAdmin, (req, res, next) => {
 	const options = { page: +req.query.page || 1, limit: +req.query.limit || 10 };
@@ -131,6 +143,14 @@ router.get("/get/all/:status", isToken, isAdmin, (req, res, next) => {
 router.get("/get/:email", isToken, isAdmin, (req, res, next) => {
 	if (!req.emailUser) return next(new BadRequestResponse(e));
 	return next(new OkResponse(req.emailUser));
+});
+
+// delete a news by admin
+router.delete("/del/:email", isToken, isAdmin, (req, res, next) => {
+	req.emailUser.remove((err, result) => {
+		if (err) return next(new BadRequestResponse(err));
+		return next(new OkResponse(result));
+	});
 });
 
 // User context Api
