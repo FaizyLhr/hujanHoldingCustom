@@ -1,0 +1,9 @@
+a {
+  cursor: pointer;
+}
+
+textarea {
+  border-style: none !important;
+  border-color: Transparent !important;
+  overflow: auto !important;
+}

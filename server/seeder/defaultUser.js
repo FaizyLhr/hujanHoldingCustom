@@ -10,7 +10,6 @@ async function seedUser() {
 		newUser.userName = "admin";
 		newUser.firstName = "admin";
 		newUser.lastName = "admin";
-		newUser.img = "../public/uploads/Faizy.png";
 		newUser.status = 0;
 		newUser.setPassword("1234");
 
@@ -24,7 +23,6 @@ async function seedUser() {
 		newUser.userName = "user";
 		newUser.firstName = "firstName";
 		newUser.lastName = "lastName";
-		newUser.img = "../public/uploads/Faizy.png";
 		newUser.status = 0;
 		newUser.setPassword("1234");
 

@@ -36,51 +36,39 @@
     </div>
     <div class="d-flex align-items-center">
       <!-- START User Info-->
-      <div class="dropdown pull-right d-lg-block d-none">
-        <button
-          class="profile-dropdown-toggle"
-          type="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-          aria-label="profile dropdown"
-        >
-          <span class="thumbnail-wrapper d32 circular inline">
-            <img
-              *ngIf="user?.img !== ''"
-              [src]="fileUrl + user?.img"
-              alt=""
-              data-src="assets/img/profiles/avatar.jpg"
-              data-src-retina="assets/img/profiles/avatar_small2x.jpg"
-              width="32"
-              height="32"
-            />
-            <img
-              *ngIf="user?.img === ''"
-              src="assets/no.png"
-              alt=""
-              data-src="assets/img/profiles/avatar.jpg"
-              data-src-retina="assets/img/profiles/avatar_small2x.jpg"
-              width="32"
-              height="32"
-            />
-          </span>
-        </button>
-        <div
-          class="dropdown-menu dropdown-menu-right profile-dropdown"
-          role="menu"
-        >
-          <a class="dropdown-item"
-            ><span
-              >Signed in as <br /><b
-                >{{ user?.firstName }} {{ user?.lastName }}</b
-              ></span
-            ></a
-          >
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item" routerLink="/profile">Profile</a>
-          <a href="#" class="dropdown-item" (click)="logout()">Logout</a>
-          <div class="dropdown-divider"></div>
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        (click)="collapse.toggle()"
+        [attr.aria-expanded]="!isCollapsed"
+        aria-controls="collapseExample"
+      >
+        <span class="thumbnail-wrapper d32 circular inline">
+          <img
+            *ngIf="user?.img !== ''"
+            [src]="fileUrl + user?.img"
+            alt=""
+            data-src="assets/img/profiles/avatar.jpg"
+            data-src-retina="assets/img/profiles/avatar_small2x.jpg"
+            width="32"
+            height="32"
+          />
+          <img
+            *ngIf="user?.img === ''"
+            src="assets/img/logo.jpg"
+            alt=""
+            data-src="assets/img/profiles/avatar.jpg"
+            data-src-retina="assets/img/profiles/avatar_small2x.jpg"
+            width="32"
+            height="32"
+          />
+        </span>
+      </button>
+      <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+        <div class="card">
+          <div class="card-body">
+            You can collapse this card by clicking Toggle
+          </div>
         </div>
       </div>
     </div>

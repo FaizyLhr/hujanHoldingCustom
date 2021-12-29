@@ -11,6 +11,7 @@ import { UserService } from '../../services';
 export class HeaderComponent implements OnInit {
   user: any;
   fileUrl = environment.file_url;
+  public isCollapsed = true;
 
   constructor(private userService: UserService, private router: Router) {}
 

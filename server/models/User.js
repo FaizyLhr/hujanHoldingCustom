@@ -12,7 +12,7 @@ let UserSchema = new mongoose.Schema(
 		firstName: { type: String, required: true, minLength: 3, default: null, trim: true },
 		lastName: { type: String, required: true, minLength: 3, default: null, trim: true },
 		userName: { type: String, unique: true, sparse: true, index: true, required: true, minLength: 3, trim: true },
-		img: { type: String, default: null },
+		img: { type: String, default: "" },
 
 		role: {
 			type: Number,
