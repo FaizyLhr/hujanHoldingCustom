@@ -18,6 +18,9 @@ mongoose
 		init();
 	});
 
+// function findHighest
+// function findHighestNumber(array) {
+
 const defaultUser = require("./seeder/defaultUser");
 
 async function init() {

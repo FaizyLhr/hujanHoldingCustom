@@ -1,29 +1,32 @@
-const multer = require("multer");
 const path = require("path");
+const multer = require("multer");
+
+const fileFilter = (req, file, cb) => {
+	if (file.mimetype.toLowerCase() === "image/jpeg" || file.mimetype.toLowerCase() === "image/jpg" || file.mimetype.toLowerCase() === "image/png") {
+		cb(null, true);
+	} else {
+		cb(null, false);
+	}
+};
 
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-		cb(null, path.join(process.cwd(), "server/public", "uploads"));
+		console.log(path.join(__dirname + "../public/uploads"));
+		// console.log(path.join(process.cwd(), "server/public", "uploads"));
+		cb(null, path.join(__dirname + "../public/uploads"));
 	},
 	filename: function (req, file, cb) {
-		cb(null, Date.now() + "-" + file.originalname);
+		const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+		cb(null, `${uniqueSuffix}-${file.originalname}`);
 	},
 });
 
-function fileFilter(req, file, cb) {
-	// The function should call `cb` with a boolean
-	// to indicate if the file should be accepted
+const upload = multer({
+	storage,
+	limits: {
+		fileSize: 1024 * 1024 * 30,
+	},
+	fileFilter,
+});
 
-	// To reject this file pass `false`, like so:
-	//   cb(null, false);
-
-	// To accept the file pass `true`, like so:
-	cb(null, true);
-
-	console.log(file);
-
-	// You can always pass an error if something goes wrong:
-	//   cb(new Error("I don't have a clue!"));
-}
-
-module.exports = multer({ storage: storage });
+module.exports = { upload };

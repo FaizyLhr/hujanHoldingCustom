@@ -67,6 +67,8 @@ export class UserService {
     type === 'login' ? (data = credentials) : (data = { user: credentials });
     return this.apiService.post('/users' + route, data).pipe(
       map((result) => {
+        console.log(result);
+
         if (type === 'login') this.setAuth(result.data);
         return result;
       })

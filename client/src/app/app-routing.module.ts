@@ -10,7 +10,7 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: () =>
       import('./feature/auth/auth.module').then((m) => m.AuthModule),
-    // canActivate: [NoAuthGuard],
+    canActivate: [NoAuthGuard],
   },
   {
     path: 'home',
